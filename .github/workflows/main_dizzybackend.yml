@@ -23,16 +23,16 @@ jobs:
           include-prerelease: true
 
       - name: Build with dotnet
-        run: dotnet build --configuration Release
+        run: dotnet build --configuration Release ./dizzyBackend/dizzyBackend.sln
 
       - name: dotnet publish
-        run: dotnet publish -c Release -o ./dizzyBackend
+        run: dotnet publish -c Release ./dizzyBackend/dizzyBackend.sln  -o ./dizzyBackend/release
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
         with:
           name: .net-app
-          path: ./dizzyBackend
+          path: ./dizzyBackend/release
 
   deploy:
     runs-on: windows-latest
